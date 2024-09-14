@@ -16,7 +16,7 @@ app.get('/api/getCostOfLiving', (req: Request, res: Response) => {
   const myResponse = {"key": "value", "key2": 2, "key3": [1,2,3]}
 
   res.json(myResponse)
-})
+});
 
 app.get('/api/getConditions', async (req: Request, res: Response) => {
   try {
@@ -62,7 +62,32 @@ app.get('/api/getPets', async (req: Request, res: Response) => {
   }
 });
 
+app.get('/api/getSalaryByJobAndLocation', async (req: Request, res: Response) => {
+  const { us_state, occupation } = req.query;
+
+  if (!us_state || !occupation) {
+    return res.status(400).json({error: 'Location or occupation not provided'});
+  }
+
+  try {
+    const query = 'SELECT median_income FROM job_income WHERE us_state = $1 AND occupation = $2';
+    const result = await client.query(query, [us_state, occupation]);
+
+    if (result.rows.length > 0) {
+      const income = result.rows[0].median_income;
+      res.json({income});
+    }
+    else {
+      res.status(404).json({message: "Not found"});
+    }
+  }
+  catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
-})
+});
 
