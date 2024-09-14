@@ -49,8 +49,18 @@ app.get('/api/getCounties', async (req: Request, res: Response) => {
     console.error("Error");
     res.status(500).send('Server Error');
   }
-})
+});
 
+app.get('/api/getPets', async (req: Request, res: Response) => {
+  try {
+    const result = await client.query('SELECT pet from pets');
+    const pets = result.rows.map((row: any) => row.pet);
+    res.json(pets);
+  } catch (err) {
+    console.error("Error");
+    res.status(500).send('Server Error');
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
