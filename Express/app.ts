@@ -12,7 +12,7 @@ const connectionURL = process.env.DATABASE_URL;
 const client = new Client(connectionURL);
 client.connect()
 
-app.get('/api/getCostOfLiving', (req, res) => {
+app.get('/api/getCostOfLiving', (req: Request, res: Response) => {
   const myResponse = {"key": "value", "key2": 2, "key3": [1,2,3]}
 
   res.json(myResponse)
@@ -21,7 +21,7 @@ app.get('/api/getCostOfLiving', (req, res) => {
 
 
 
-app.get('/api/databaseTest', async (req, res) => {
+app.get('/api/databaseTest', async (req: Request, res: Response) => {
   const results = await client.query(`
     SELECT table_name 
 FROM information_schema.tables
