@@ -87,6 +87,81 @@ app.get('/api/getSalaryByJobAndLocation', async (req: Request, res: Response) =>
   }
 });
 
+app.get('/api/getCostForPet', async (req: Request, res: Response) => {
+  const { pet } = req.query;
+
+  if (!pet) {
+    return res.status(400).json({error: 'Pet not provided'});
+  }
+
+  try {
+    const query = 'SELECT cost FROM pets WHERE pet = $1';
+    const result = await client.query(query, [pet]);
+
+    if (result.rows.length > 0) {
+      const cost = result.rows[0].cost;
+      res.json({cost});
+    }
+    else {
+      res.status(404).json({message: "Not found"});
+    }
+  }
+  catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/getCostForCondition', async (req: Request, res: Response) => {
+  const { condition } = req.query;
+
+  if (!condition) {
+    return res.status(400).json({error: 'Condition not provided'});
+  }
+
+  try {
+    const query = 'SELECT cost FROM conditions WHERE condition = $1';
+    const result = await client.query(query, [condition]);
+
+    if (result.rows.length > 0) {
+      const cost = result.rows[0].cost;
+      res.json({cost});
+    }
+    else {
+      res.status(404).json({message: "Not found"});
+    }
+  }
+  catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/getCostByCountyAndFamily', async (req: Request, res: Response) => {
+  const { county, family_size } = req.query;
+
+  if (!county || !family_size) {
+    return res.status(400).json({error: 'County or family size not provided'});
+  }
+
+  try {
+    const query = 'SELECT * FROM living_cost WHERE county_name = $1 AND family_size = $2';
+    const result = await client.query(query, [county, family_size]);
+
+    if (result.rows.length > 0) {
+      const living_cost = result.rows[0].cost;
+      res.json({living_cost});
+    }
+    else {
+      res.status(404).json({message: "Not found"});
+    }
+  }
+  catch (err) {
+    console.error('Error executing query', err);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 });
