@@ -19,6 +19,17 @@ app.get('/api/getCostOfLiving', (req: Request, res: Response) => {
   // res.send('Hello World!')
 })
 
+app.get('/api/getConditions', async (req: Request, res: Response) => {
+  try {
+    const result = await client.query('SELECT condition from conditions');
+    const conditions = result.rows.map((row: any) => row.condition);
+    res.json(conditions);
+  } catch (err) {
+    console.error("Error");
+    res.status(500).send('Server Error');
+  }
+});
+
 
 
 app.get('/api/databaseTest', async (req: Request, res: Response) => {
