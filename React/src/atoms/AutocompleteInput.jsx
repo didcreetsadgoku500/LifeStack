@@ -40,7 +40,6 @@ const AutocompleteInput = ({ suggestions, onSelect }) => {
   };
 
   return (
-    // <div className="relative w-64">
       <div className="group relative max-w-7xl mx-auto">
 
       
@@ -59,7 +58,7 @@ const AutocompleteInput = ({ suggestions, onSelect }) => {
       <FadeTransition fade_duration={50}>
         
       {showSuggestions && (
-        <ul className="absolute w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto">
+        <ul className="absolute w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto z-10  ">
           {filteredSuggestions.map((suggestion, index) => (
             <li
               key={suggestion}
@@ -77,7 +76,6 @@ const AutocompleteInput = ({ suggestions, onSelect }) => {
 
 </FadeTransition>
     </div>
-    // </div>
   );
 };
 

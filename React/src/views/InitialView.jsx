@@ -16,7 +16,7 @@ const InitialView = (props) => {
         
         <div className="flex flex-wrap mt-10">
 
-        <CardButton iconSrc="./next.png" onClick={() => props.setView(() => SalaryView)}>
+        <CardButton iconSrc="./next.png" onClick={() => props.setView(() => LocationView)}>
                 Let's get started!
         </CardButton>
         </div>

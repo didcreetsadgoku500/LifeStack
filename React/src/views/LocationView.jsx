@@ -1,15 +1,25 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import AutocompleteInput from "../atoms/AutocompleteInput"
 import CardButton from "../atoms/CardButton"
 import Input from "../atoms/Input"
+import { API_BASE_URL } from "../config"
 
 
 const LocationView = (props) => {
     const [suggestions, setSuggestions] = useState([])
 
-    useEffect({
+    useEffect(() => {
         // Fetch here
+        const getLocations = async () => {
+            const countiesAndStates = await fetch(API_BASE_URL + "api/getLocations")
+            const casJSON = await countiesAndStates.json()
+            const combined = casJSON.map((row) => `${row[0]}, ${row[1]}`)
+            setSuggestions(combined)
 
+
+        }
+
+        getLocations();
     }, [])
     
     
@@ -26,7 +36,7 @@ const LocationView = (props) => {
         </p>
 
             <div className="flex flex-wrap flex-col gap-5 w-100">
-            <AutocompleteInput suggestions={["Hello", "World"]}>
+            <AutocompleteInput suggestions={suggestions}>
 
             </AutocompleteInput>
             <CardButton>Confirm location</CardButton>
