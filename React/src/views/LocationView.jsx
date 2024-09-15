@@ -47,7 +47,7 @@ const LocationView = (props) => {
             </AutocompleteInput>
             <CardButton onClick={() => {
                 if (appContext && appContext.state.primaryLocation != "" && appContext.state.primaryLocation != null) {
-                    props.setView(SalaryView)
+                    props.setView(() => SalaryView)
                 }
             }}>Confirm location</CardButton>
 

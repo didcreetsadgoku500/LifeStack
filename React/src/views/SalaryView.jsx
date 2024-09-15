@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Input from "../atoms/Input"
 import CardButton from "../atoms/CardButton";
 import FadeTransition from "../components/FadeTransition";
+import { GlobalContext } from "../components/GlobalState";
 
 const handleSalaryChange = (e, salaryState, setSalary) => {
     // TODO: enforce numbers only by comparing salaryState (previous state) to updated state
@@ -17,6 +18,7 @@ const handleSalaryChange = (e, salaryState, setSalary) => {
 
 const SalaryView = () => {
     const [salaryState, setSalary] = useState("");
+    const appContext = useContext(GlobalContext);
 
     return <div className="lg:w-1/3 mx-auto pt-12">
 
