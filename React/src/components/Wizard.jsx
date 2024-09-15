@@ -9,9 +9,12 @@ const Wizard = () => {
   
 
   return (
+    <div className='w-screen h-screen'>
+
       <FadeTransition>
         <View setView={setView} />
       </FadeTransition>
+    </div>
   );
 };
 
