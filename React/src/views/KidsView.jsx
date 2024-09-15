@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import CardButton from "../atoms/CardButton";
 import { GlobalContext } from "../components/GlobalState";
+import PetsView from "./PetsView"
 
 const KidsView = (props) => {
     const appContext = useContext(GlobalContext)
@@ -21,7 +22,7 @@ const KidsView = (props) => {
             const newState = appContext.state
             newState.primaryFamilySize = `${newState.primaryFamilySize}0c`
             appContext.setState(newState)
-            props.setView(() => KidsView)
+            props.setView(() => PetsView)
         }}>
             No children
         </CardButton>
@@ -32,7 +33,7 @@ const KidsView = (props) => {
             const newState = appContext.state
             newState.primaryFamilySize = `${newState.primaryFamilySize}1c`
             appContext.setState(newState)
-            props.setView(() => KidsView)
+            props.setView(() => PetsView)
         }}>
 
             1 child
@@ -43,7 +44,7 @@ const KidsView = (props) => {
             const newState = appContext.state
             newState.primaryFamilySize = `${newState.primaryFamilySize}2c`
             appContext.setState(newState)
-            props.setView(() => KidsView)
+            props.setView(() => PetsView)
         }}>
 
             2 children
@@ -54,7 +55,7 @@ const KidsView = (props) => {
             const newState = appContext.state
             newState.primaryFamilySize = `${newState.primaryFamilySize}3c`
             appContext.setState(newState)
-            props.setView(() => KidsView)
+            props.setView(() => PetsView)
         }}>
 
             3 children
@@ -65,7 +66,7 @@ const KidsView = (props) => {
             const newState = appContext.state
             newState.primaryFamilySize = `${newState.primaryFamilySize}4c`
             appContext.setState(newState)
-            props.setView(() => KidsView)
+            props.setView(() => PetsView)
         }}>
 
             4+ children

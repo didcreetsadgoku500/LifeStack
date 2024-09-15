@@ -13,18 +13,22 @@ interface IGlobalState {
 
     primaryFamilySize?: string,
     secondaryFamilySize?: string,
-    primaryCosts?: {
-        [family: string]: {
-            cost: number,
-            option?: string
-        }
-    }
-    secondaryCosts?: {
-        [family: string]: {
-            cost: number,
-            option?: string
-        }
-    }
+    // primaryCosts?: {
+    //     [family: string]: {
+    //         cost: number,
+    //         option?: string
+    //     }
+    // }
+    // secondaryCosts?: {
+    //     [family: string]: {
+    //         cost: number,
+    //         option?: string
+    //     }
+    // }
+    primaryPets?: string[],
+    secondaryPets?: string[],
+    primaryAilments?: string[],
+    secondaryAilments?: string[]
 }
 
 interface IGlobalContext {

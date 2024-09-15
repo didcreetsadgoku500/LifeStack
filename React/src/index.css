@@ -9,6 +9,7 @@
 
   color-scheme: light;
   background: linear-gradient(125deg, rgba(236,175,175,1) 0%, rgba(242,242,242,1) 50%, rgba(162,164,255,1) 100%); 
+  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
