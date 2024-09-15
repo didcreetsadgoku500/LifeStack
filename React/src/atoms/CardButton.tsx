@@ -4,6 +4,7 @@ interface ButtonProps {
     onClick: () => void;
     children: ReactNode;
     iconSrc?: string;
+    primary?: boolean;
 
 }
 
