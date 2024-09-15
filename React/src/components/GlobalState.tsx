@@ -2,8 +2,10 @@ import { createContext, useState } from "react";
 
 
 interface IGlobalState {
-    primaryLocation: string,
-    secondaryLocation?: string,
+    primaryCounty: string,
+    primaryState: string,
+    secondaryCounty: string,
+    secondaryState: string,
     primaryJobTitle?: string,
     secondaryJobTitle?: string,
     primarySalary?: number,

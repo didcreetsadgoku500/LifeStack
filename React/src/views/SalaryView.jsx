@@ -3,6 +3,8 @@ import Input from "../atoms/Input"
 import CardButton from "../atoms/CardButton";
 import FadeTransition from "../components/FadeTransition";
 import { GlobalContext } from "../components/GlobalState";
+import FindMySalaryView from "./FindMySalaryView";
+import FamilyView from "./FamilyView";
 
 const handleSalaryChange = (e, salaryState, setSalary) => {
     // TODO: enforce numbers only by comparing salaryState (previous state) to updated state
@@ -16,7 +18,7 @@ const handleSalaryChange = (e, salaryState, setSalary) => {
     setSalary(e.target.value)
 }
 
-const SalaryView = () => {
+const SalaryView = (props) => {
     const [salaryState, setSalary] = useState("");
     const appContext = useContext(GlobalContext);
 
@@ -31,9 +33,13 @@ const SalaryView = () => {
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
     <FadeTransition fade_duration={200}>
         {(salaryState == "") ? 
-            <CardButton iconSrc="./payroll.png" primary>I don't know my salary</CardButton> 
+            <CardButton iconSrc="./payroll.png" primary
+                onClick={() => props.setView(() => FindMySalaryView)}
+            >I don't know my salary</CardButton> 
         : 
-            <CardButton iconSrc="./payroll.png">Confirm salary</CardButton>    
+            <CardButton iconSrc="./payroll.png"
+                onClick={() => props.setView(() => FamilyView)}
+            >Confirm salary</CardButton>    
         }
     </FadeTransition>
     </div>

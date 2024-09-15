@@ -10,7 +10,7 @@ const AutocompleteInput = ({ suggestions, onSelect, onInputChange}) => {
 
   useEffect(() => {
     const filtered = suggestions.filter(suggestion =>
-      suggestion.toLowerCase().includes(inputValue.toLowerCase())
+      suggestion.text.toLowerCase().includes(inputValue.toLowerCase())
     );
     setFilteredSuggestions(filtered);
     setShowSuggestions(filtered.length > 0 && inputValue !== '');
@@ -23,7 +23,7 @@ const AutocompleteInput = ({ suggestions, onSelect, onInputChange}) => {
   };
 
   const handleSelectSuggestion = (suggestion) => {
-    setInputValue(suggestion);
+    setInputValue(suggestion.text);
     setShowSuggestions(false);
     onSelect(suggestion);
     onInputChange(suggestion);
@@ -63,13 +63,13 @@ const AutocompleteInput = ({ suggestions, onSelect, onInputChange}) => {
         <ul className="absolute w-full mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-auto z-10  ">
           {filteredSuggestions.map((suggestion, index) => (
             <li
-              key={suggestion}
+              key={suggestion.text}
               onClick={() => handleSelectSuggestion(suggestion)}
               className={`px-3 py-2 cursor-pointer hover:bg-gray-100 ${
                 index === highlightedIndex ? 'bg-blue-100' : ''
               }`}
             >
-              {suggestion}
+              {suggestion.text}
             </li>
           ))}
         </ul>

@@ -17,7 +17,7 @@ const LocationView = (props) => {
         const getLocations = async () => {
             const countiesAndStates = await fetch(API_BASE_URL + "api/getLocations")
             const casJSON = await countiesAndStates.json()
-            const combined = casJSON.map((row) => `${row[0]}, ${row[1]}`)
+            const combined = casJSON.map((row) => ({"county": row[0], "state": row[1], "text": `${row[0]}, ${row[1]}`}))
             setSuggestions(combined)
         }
 
