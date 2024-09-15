@@ -8,6 +8,11 @@ const ReceiptView = (props) => {
     const [primaryExpenses, setPrimaryExpenses] = useState([])
     const [secondaryExpenses, setSecondaryExpenses] = useState([])
 
+    const primaryTotal = primaryExpenses.reduce((n, {cost}) => n + parseFloat(cost), 0)
+    const secondaryTotal = secondaryExpenses.reduce((n, {cost}) => n + parseFloat(cost), 0)
+
+
+
     useEffect(() => {
         const finalProcessing = async () => {
             const primaryReceipt = []
@@ -15,7 +20,23 @@ const ReceiptView = (props) => {
 
             let fullConditions = await fetch(API_BASE_URL + "api/getConditions")
             fullConditions = await fullConditions.json()
+
+            let fullPets = await fetch(API_BASE_URL + "api/getPets")
+            fullPets = await fullPets.json()
+
             
+            for (const c of fullPets) {
+                if (appContext.state.primaryPets.includes(c.pet)) {
+                    primaryReceipt.push({item: c.pet, cost: c.cost})
+                }
+                if (appContext.state.secondaryPets.includes(c.condition)) {
+                    secondaryReceipt.push({item: c.pet, cost: c.cost})
+                }
+            }
+
+
+
+            // conditions
             for (const c of fullConditions) {
                 if (appContext.state.primaryConditions.includes(c.condition)) {
                     primaryReceipt.push({item: c.condition, cost: c.cost})
@@ -63,8 +84,13 @@ const ReceiptView = (props) => {
 
                     ))}
                     <div className="border-t border-gray-300 mt-4 pt-4">
-                        <p className="font-bold text-gray-800 dark:text-gray-900">
-                            Total: {currencyFormatter(-9999)}
+                        <p className="text-gray-800 font-bold justify-between w-full flex flex-row">
+                        <span>Total Expenses</span>
+                        <span>-{currencyFormatter(primaryTotal)}</span>
+                        </p>
+                        <p className="text-gray-800 font-bold justify-between w-full flex flex-row">
+                        <span>Remaining</span>
+                        <span>{currencyFormatter(appContext.state.primarySalary - primaryTotal)}</span>
                         </p>
                     </div>
                 </div>
@@ -88,10 +114,16 @@ const ReceiptView = (props) => {
 
                     ))}
                     <div className="border-t border-gray-300 mt-4 pt-4">
-                        <p className="font-bold text-gray-800 dark:text-gray-900">
-                            Total: {currencyFormatter(-9999)}
+                        <p className="text-gray-800 font-bold justify-between w-full flex flex-row">
+                        <span>Total Expenses</span>
+                        <span>-{currencyFormatter(secondaryTotal)}</span>
+                        </p>
+                        <p className="text-gray-800 font-bold justify-between w-full flex flex-row">
+                        <span>Remaining</span>
+                        <span>{currencyFormatter(appContext.state.secondarySalary - secondaryTotal)}</span>
                         </p>
                     </div>
+                
                 </div>
             </div>
 
