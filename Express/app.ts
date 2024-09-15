@@ -152,19 +152,19 @@ app.get('/api/getCostForCondition', async (req: Request, res: Response) => {
 });
 
 app.get('/api/getCostByCountyAndFamily', async (req: Request, res: Response) => {
-  const { county, family_size } = req.query;
+  const { county, family_size, us_state } = req.query;
 
   if (!county || !family_size) {
     return res.status(400).json({error: 'County or family size not provided'});
   }
 
   try {
-    const query = 'SELECT * FROM living_cost WHERE county_name = $1 AND family_size = $2';
-    const result = await client.query(query, [county, family_size]);
+    const query = 'SELECT * FROM living_cost WHERE county_name = $1 AND family_size = $2 AND us_state = $3';
+    const result = await client.query(query, [county, family_size, us_state]);
 
     if (result.rows.length > 0) {
-      const living_cost = result.rows[0].cost;
-      res.json({living_cost});
+      const living_cost = result.rows[0];
+      res.json(living_cost);
     }
     else {
       res.status(404).json({message: "Not found"});

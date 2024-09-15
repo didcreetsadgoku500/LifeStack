@@ -24,6 +24,18 @@ const ReceiptView = (props) => {
             let fullPets = await fetch(API_BASE_URL + "api/getPets")
             fullPets = await fullPets.json()
 
+            let costOfLivingPrimary = await fetch(API_BASE_URL + `api/getCostByCountyAndFamily?family_size=${appContext.state.primaryFamilySize}&county=${appContext.state.primaryCounty}&us_state=${appContext.state.primaryState}`)
+            costOfLivingPrimary = await costOfLivingPrimary.json()
+
+            let costOfLivingSecondary = await fetch(API_BASE_URL + `api/getCostByCountyAndFamily?family_size=${appContext.state.secondaryFamilySize}&county=${appContext.state.secondaryCounty}&us_state=${appContext.state.secondaryState}`)
+            costOfLivingSecondary = await costOfLivingSecondary.json()
+
+            const importantKeys = ["housing", "food", "transportation", "taxes", "other", "healthcare", "childcare"]
+            for (const k of importantKeys) {
+                primaryReceipt.push({item: k, cost: costOfLivingPrimary[k]})
+                secondaryReceipt.push({item: k, cost: costOfLivingSecondary[k]})
+
+            }
             
             for (const c of fullPets) {
                 if (appContext.state.primaryPets.includes(c.pet)) {
@@ -50,6 +62,7 @@ const ReceiptView = (props) => {
 
             setPrimaryExpenses(primaryReceipt)
             setSecondaryExpenses(secondaryReceipt)
+            console.log(primaryReceipt)
         }
 
         finalProcessing()
@@ -69,6 +82,9 @@ const ReceiptView = (props) => {
                     <h3 className="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
                         {`${appContext.state.primaryCounty}, ${appContext.state.primaryState}`}
                     </h3>
+                    <h4 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                    {appContext.state.primaryJobTitle}
+                    </h4>
 
                     <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         Starting Salary: {currencyFormatter(appContext.state.primarySalary)}
@@ -78,7 +94,7 @@ const ReceiptView = (props) => {
 {/* THE MAPPER */}
                     {primaryExpenses.map((item, index) => (
                     <p className="text-gray-800 justify-between w-full flex flex-row">
-                        <span>{item.item}</span>
+                        <span className="capitalize">{item.item}</span>
                         <span>{currencyFormatter(item.cost)}</span>
                     </p>
 
@@ -100,7 +116,9 @@ const ReceiptView = (props) => {
                     {`${appContext.state.secondaryCounty}, ${appContext.state.secondaryState}`}
                     
                     </h3>
-
+                    <h4 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                    {appContext.state.secondaryJobTitle}
+                    </h4>
                     <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
                         Starting Salary: {currencyFormatter(appContext.state.secondarySalary)}
                     </p>
@@ -108,7 +126,7 @@ const ReceiptView = (props) => {
 {/* THE MAPPER SECONDARY */}
                     {secondaryExpenses.map((item, index) => (
                     <p className="text-gray-800 justify-between w-full flex flex-row">
-                        <span>{item.item}</span>
+                        <span className="capitalize">{item.item}</span>
                         <span>{currencyFormatter(item.cost)}</span>
                     </p>
 
