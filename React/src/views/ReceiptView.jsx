@@ -26,10 +26,12 @@ const ReceiptView = (props) => {
                         Alabama
                     </h3>
 
-                    {/*{appContext.state.primaryCosts.map((item, index) => (*/}
-                    <p className="text-gray-800">
-                        Subtotal: {currencyFormatter(45000)}
+                    <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        {/*Starting Salary: {currencyFormatter(appContext.state.primarySalary)}*/}
+                        Starting Salary: $45,000
                     </p>
+
+                    {/*{appContext.state.primaryCosts.map((item, index) => (*/}
                     <p className="text-gray-800">
                         Pet Rock: {currencyFormatter(-6500)}
                     </p>
@@ -53,10 +55,12 @@ const ReceiptView = (props) => {
                         Kentucky
                     </h3>
 
-                    {/*{appContext.state.secondaryCosts.map((item, index) => (*/}
-                    <p className="text-gray-800">
-                        Starting: {currencyFormatter(42030)}
+                    <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
+                        {/*Starting Salary: {currencyFormatter(appContext.state.secondarySalary)}*/}
+                        Starting Salary: $42,030
                     </p>
+
+                    {/*{appContext.state.secondaryCosts.map((item, index) => (*/}
                     <p className="text-gray-800">
                         Doctor Appointment: {currencyFormatter(-6500)}
                     </p>
