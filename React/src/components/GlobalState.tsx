@@ -10,6 +10,9 @@ interface IGlobalState {
     secondaryJobTitle?: string,
     primarySalary?: number,
     secondarySalary?: number,
+
+    primaryFamilySize?: string,
+    secondaryFamilySize?: string,
     primaryCosts?: {
         [family: string]: {
             cost: number,
