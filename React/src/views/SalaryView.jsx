@@ -29,9 +29,9 @@ const SalaryView = () => {
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
     <FadeTransition fade_duration={200}>
         {(salaryState == "") ? 
-            <CardButton primary>I don't know my salary</CardButton> 
+            <CardButton iconSrc="./payroll.png" primary>I don't know my salary</CardButton> 
         : 
-            <CardButton>Confirm salary</CardButton>    
+            <CardButton iconSrc="./payroll.png">Confirm salary</CardButton>    
         }
     </FadeTransition>
     </div>
