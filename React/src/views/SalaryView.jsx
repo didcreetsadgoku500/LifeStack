@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Input from "../atoms/Input"
+import CardButton from "../atoms/CardButton";
 
 const handleSalaryChange = (e, salaryState, setSalary) => {
     // TODO: enforce numbers only by comparing salaryState (previous state) to updated state
@@ -23,11 +24,13 @@ const SalaryView = () => {
 
 
 
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap flex-col gap-5">
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
-
+    <CardButton primary>
+        I don't know my salary
+    </CardButton>
     </div>
-    <p>{salaryState}</p>
+    
         
     </div>
           
