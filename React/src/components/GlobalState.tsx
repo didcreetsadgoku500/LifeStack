@@ -27,8 +27,8 @@ interface IGlobalState {
     // }
     primaryPets?: string[],
     secondaryPets?: string[],
-    primaryAilments?: string[],
-    secondaryAilments?: string[]
+    primaryConditions?: string[],
+    secondaryConditions?: string[]
 }
 
 interface IGlobalContext {

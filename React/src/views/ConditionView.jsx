@@ -4,21 +4,20 @@ import { API_BASE_URL } from "../config"
 
 import { GlobalContext } from "../components/GlobalState";
 import CardButton from "../atoms/CardButton";
-import ConditionView from "./ConditionView";
 
-const PetsView = (props) => {
+const ConditionView = (props) => {
     const appContext = useContext(GlobalContext)
-    const [petsList, setPetsList] = useState([])
+    const [conditionsList, setConditionsList] = useState([])
     const [checkboxStates, setBoxStates] = useState({})
 
     useEffect(() => {
-        const getPets = async () => {
-            const res = await fetch(API_BASE_URL + "api/getPets")
-            const pets = await res.json()
-            setPetsList(pets)
+        const getConditions = async () => {
+            const res = await fetch(API_BASE_URL + "api/getConditions")
+            const conditions = await res.json()
+            setConditionsList(conditions)
         }
 
-        getPets()
+        getConditions()
     }
         , [])
 
@@ -30,37 +29,36 @@ const PetsView = (props) => {
         Family Size
     </h2>
     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl">
-        Do you have any pets? Select all of them here<br />.
+        Do you experience continued effects caused by any of the following conditions? Select all of them here<br />.
     </p>
 
     <div className="flex flex-col gap-5">
         {
-            petsList.map((pet) => (<div key={pet}><ToggleBox 
+            conditionsList.map((condition) => (<div key={condition}><ToggleBox 
             onToggle={(isActive) => {
                 const newState = checkboxStates;
-                newState[pet] = isActive;
+                newState[condition] = isActive;
                 setBoxStates(newState)
             }} 
-            iconSrc="/paws.png">
-                    {pet}
+            iconSrc="/heart.png">
+                    {condition}
                 </ToggleBox></div>))
         }
         <div>
             
             <CardButton primary iconSrc="/next.png" onClick={() => {
-                const finalPetsList = []
-                for (const pet in checkboxStates) {
-                    if (checkboxStates[pet] === true) {
-                        finalPetsList.push(pet)
+                const finalConditionsList = []
+                for (const condition in checkboxStates) {
+                    if (checkboxStates[condition] === true) {
+                        finalConditionsList.push(condition)
                     }
                 }
 
                 const newState = appContext.state
-                newState.primaryPets = finalPetsList
+                newState.primaryConditions = finalConditionsList
                 appContext.setState(newState)
-                props.setView(() => ConditionView)
             }}>
-            Confirm pets
+            Confirm conditions
         </CardButton>
             </div>
         
@@ -70,4 +68,4 @@ const PetsView = (props) => {
     </div>
 }
 
-export default PetsView;
+export default ConditionView;

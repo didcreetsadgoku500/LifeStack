@@ -17,6 +17,8 @@ const KidsView = (props) => {
     </p>
 
     <div className="flex flex-wrap flex-col gap-5">
+        <div>
+
         <CardButton iconSrc="/people1.png"
         onClick={() => {
             const newState = appContext.state
@@ -26,8 +28,9 @@ const KidsView = (props) => {
         }}>
             No children
         </CardButton>
+        </div>
 
-
+        <div>
         <CardButton iconSrc="/people1.png"
         onClick={() => {
             const newState = appContext.state
@@ -38,6 +41,7 @@ const KidsView = (props) => {
 
             1 child
         </CardButton>
+        </div>        <div>
 
         <CardButton iconSrc="/people2.png"
         onClick={() => {
@@ -49,6 +53,7 @@ const KidsView = (props) => {
 
             2 children
         </CardButton>
+        </div>        <div>
 
         <CardButton iconSrc="/people3.png"
         onClick={() => {
@@ -60,6 +65,7 @@ const KidsView = (props) => {
 
             3 children
         </CardButton>
+        </div>        <div>
 
         <CardButton iconSrc="/people3.png"
         onClick={() => {
@@ -71,7 +77,7 @@ const KidsView = (props) => {
 
             4+ children
         </CardButton>
-        
+        </div>
     </div>
     </div>
 }

@@ -17,6 +17,10 @@ const FamilyView = (props) => {
     </p>
 
     <div className="flex flex-wrap flex-col gap-5">
+        
+        <div>
+
+        
         <CardButton iconSrc="/people1.png"
         onClick={() => {
             const newState = appContext.state
@@ -27,7 +31,8 @@ const FamilyView = (props) => {
 
             1 Adult
         </CardButton>
-
+        </div>
+        <div>
         <CardButton iconSrc="/people2.png"
         onClick={() => {
             const newState = appContext.state
@@ -39,6 +44,7 @@ const FamilyView = (props) => {
 
             2+ Adults
         </CardButton>
+        </div>
     </div>
     </div>
 }
