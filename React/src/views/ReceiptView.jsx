@@ -1,15 +1,8 @@
 import {useContext} from "react";
 import {GlobalContext} from "../components/GlobalState";
+import {currencyFormatter} from "../utils/utility.js";
 
 const ReceiptView = (props) => {
-
-    function currencyFormatter(amountString) {
-        let amount = parseFloat(amountString);
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD'
-        }).format(amount);
-    }
 
     const appContext = useContext(GlobalContext)
 
