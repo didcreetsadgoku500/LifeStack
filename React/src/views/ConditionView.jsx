@@ -26,7 +26,7 @@ const ConditionView = (props) => {
         
 
     <h2 className="mb-4 text-3xl font-bold leading-none tracking-tight text-gray-800">
-        Family Size
+        Medical Conditions
     </h2>
     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl">
         Do you experience continued effects caused by any of the following conditions? Select all of them here<br />.
