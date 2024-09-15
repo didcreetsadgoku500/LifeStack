@@ -3,9 +3,15 @@ import Input from "../atoms/Input"
 import CardButton from "../atoms/CardButton";
 import FadeTransition from "../components/FadeTransition";
 
-
 const handleSalaryChange = (e, salaryState, setSalary) => {
     // TODO: enforce numbers only by comparing salaryState (previous state) to updated state
+
+    const negatedNumber_Pattern = /([^0-9]+)/;
+
+    if (negatedNumber_Pattern.exec(e.target.value) != null) {
+        e.target.value = salaryState;
+    }
+
     setSalary(e.target.value)
 }
 
