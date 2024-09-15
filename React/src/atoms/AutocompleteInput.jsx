@@ -19,14 +19,21 @@ const AutocompleteInput = ({ suggestions, onSelect, onInputChange}) => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
-    onInputChange(e.target.value);
+    if (onInputChange) {
+
+      onInputChange(e.target.value);
+    }
   };
 
   const handleSelectSuggestion = (suggestion) => {
     setInputValue(suggestion.text);
     setShowSuggestions(false);
     onSelect(suggestion);
-    onInputChange(suggestion);
+    
+    if (onInputChange) {
+
+      onInputChange(suggestion);
+    }
   };
 
   const handleKeyDown = (e) => {

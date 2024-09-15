@@ -39,14 +39,16 @@ const LocationView = (props) => {
             <AutocompleteInput suggestions={suggestions} onSelect={
                 (newLocation) => {
                     const newState = appContext.state;
-                    newState.primaryLocation = newLocation;
+                    newState.primaryCounty = newLocation.county;
+                    newState.primaryState = newLocation.state;
+                    console.log(newState)
                     appContext.setState(newState)
                 }
                 }>
 
             </AutocompleteInput>
             <CardButton onClick={() => {
-                if (appContext && appContext.state.primaryLocation != "" && appContext.state.primaryLocation != null) {
+                if (appContext && appContext.state.primaryCounty != "" && appContext.state.primaryCounty != null) {
                     props.setView(() => SalaryView)
                 }
             }}>Confirm location</CardButton>
