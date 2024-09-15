@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "../atoms/Input"
 import CardButton from "../atoms/CardButton";
+import FadeTransition from "../components/FadeTransition";
 
 
 const handleSalaryChange = (e, salaryState, setSalary) => {
@@ -20,9 +21,13 @@ const SalaryView = () => {
 
     <div className="flex flex-wrap flex-col gap-5">
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
-    <CardButton primary>
-        I don't know my salary
-    </CardButton>
+    <FadeTransition>
+        {(salaryState == "") ? 
+            <CardButton primary>I don't know my salary</CardButton> 
+        : 
+            <CardButton>Confirm salary</CardButton>    
+        }
+    </FadeTransition>
     </div>
     
         
