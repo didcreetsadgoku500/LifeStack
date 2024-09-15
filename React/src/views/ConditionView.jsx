@@ -35,14 +35,14 @@ const ConditionView = (props) => {
 
     <div className="flex flex-col gap-5">
         {
-            conditionsList.map((condition) => (<div key={condition}><ToggleBox 
+            conditionsList.map((condition) => (<div key={condition.condition}><ToggleBox 
             onToggle={(isActive) => {
                 const newState = checkboxStates;
-                newState[condition] = isActive;
+                newState[condition.condition] = isActive;
                 setBoxStates(newState)
             }} 
             iconSrc="/heart.png">
-                    {condition}
+                    {condition.condition}
                 </ToggleBox></div>))
         }
         <div>

@@ -23,8 +23,8 @@ app.get('/api/getCostOfLiving', (req: Request, res: Response) => {
 
 app.get('/api/getConditions', async (req: Request, res: Response) => {
   try {
-    const result = await client.query('SELECT condition from conditions');
-    const conditions = result.rows.map((row: any) => row.condition);
+    const result = await client.query('SELECT condition, cost from conditions');
+    const conditions = result.rows.map((row: any) => ({condition: row.condition, cost: row.cost}));
     res.json(conditions);
   } catch (err) {
     console.error("Error");
@@ -67,8 +67,8 @@ app.get('/api/getLocations', async (req: Request, res: Response) => {
 
 app.get('/api/getPets', async (req: Request, res: Response) => {
   try {
-    const result = await client.query('SELECT pet from pets');
-    const pets = result.rows.map((row: any) => row.pet);
+    const result = await client.query('SELECT pet, cost from pets');
+    const pets = result.rows.map((row: any) => ({pet: row.pet, cost: row.cost}));
     res.json(pets);
   } catch (err) {
     console.error("Error");

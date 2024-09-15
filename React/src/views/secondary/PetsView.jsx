@@ -35,14 +35,14 @@ const PetsView = (props) => {
 
     <div className="flex flex-col gap-5">
         {
-            petsList.map((pet) => (<div key={pet}><ToggleBox 
+            petsList.map((pet) => (<div key={pet.pet}><ToggleBox 
             onToggle={(isActive) => {
                 const newState = checkboxStates;
-                newState[pet] = isActive;
+                newState[pet.pet] = isActive;
                 setBoxStates(newState)
             }} 
             iconSrc="/paws.png">
-                    {pet}
+                    {pet.pet}
                 </ToggleBox></div>))
         }
         <div>
