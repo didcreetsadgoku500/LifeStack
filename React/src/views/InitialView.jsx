@@ -11,8 +11,8 @@ import NextView from "./SampleView"
 const InitialView = (props) => {
 
     return <div className="pt-60">
-        <h1 className="mb-4 mx-auto text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">LifeStack</h1>
-        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">See how your cost of living stacks up against someone elses'</p>
+        <h1 className="mb-4 mx-auto text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl ">LifeStack</h1>
+        <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl ">See how your cost of living stacks up against someone elses'</p>
         
         <div className="flex flex-wrap mt-10">
 

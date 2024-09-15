@@ -28,7 +28,7 @@ const LocationView = (props) => {
     return <div className="lg:w-1/3 mx-auto pt-12">
         
 
-        <h2 className="mb-4 text-3xl font-bold leading-none tracking-tight text-gray-800 dark:text-white">
+        <h2 className="mb-4 text-3xl font-bold leading-none tracking-tight text-gray-800">
             Primary Location
         </h2>
         <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl">
