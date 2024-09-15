@@ -15,12 +15,13 @@ const ReceiptView = (props) => {
             <div className="flex justify-between space-x-20">
                 <div className="w-1/2 bg-white p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
-                        {`${appContext.state.primaryCounty}, ${appContext.state.primaryState}`}
+                        {/*{appContext.state.primaryLocation}*/}
+                        Alabama
                     </h3>
 
                     <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                        Starting Salary: {currencyFormatter(appContext.state.primarySalary)}
-                        {/* Starting Salary: $45,000 */}
+                        {/*Starting Salary: {currencyFormatter(appContext.state.primarySalary)}*/}
+                        Starting Salary: $45,000
                     </p>
 
                     {/*{appContext.state.primaryCosts.map((item, index) => (*/}
@@ -43,12 +44,13 @@ const ReceiptView = (props) => {
 
                 <div className="w-1/2 bg-white p-6 rounded-lg shadow-lg">
                     <h3 className="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
-                    {`${appContext.state.secondaryCounty}, ${appContext.state.secondaryState}`}
-                    
+                        {/*{appContext.state.secondaryLocation}*/}
+                        Kentucky
                     </h3>
 
                     <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
-                        Starting Salary: {currencyFormatter(appContext.state.secondarySalary)}
+                        {/*Starting Salary: {currencyFormatter(appContext.state.secondarySalary)}*/}
+                        Starting Salary: $42,030
                     </p>
 
                     {/*{appContext.state.secondaryCosts.map((item, index) => (*/}

@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import ToggleBox from "../atoms/ToggleBox";
-import { API_BASE_URL } from "../config"
+import ToggleBox from "../../atoms/ToggleBox";
+import { API_BASE_URL } from "../../config"
 
-import { GlobalContext } from "../components/GlobalState";
-import CardButton from "../atoms/CardButton";
-import PrimaryCompleteView from "./PrimaryCompleteView";
+import { GlobalContext } from "../../components/GlobalState";
+import CardButton from "../../atoms/CardButton";
+import PrimaryCompleteView from "./SecondaryCompletionView";
 
 const ConditionView = (props) => {
     const appContext = useContext(GlobalContext)
@@ -30,7 +30,7 @@ const ConditionView = (props) => {
         Medical Conditions
     </h2>
     <p className="mb-6 text-lg font-normal text-gray-500 lg:text-xl">
-        Do you experience continued effects caused by any of the following conditions? Select all of them here<br />.
+        Do you want to account for any medical conditions? Select all of them here<br />.
     </p>
 
     <div className="flex flex-col gap-5">
@@ -56,7 +56,7 @@ const ConditionView = (props) => {
                 }
 
                 const newState = appContext.state
-                newState.primaryConditions = finalConditionsList
+                newState.secondaryConditions = finalConditionsList
                 appContext.setState(newState)
                 props.setView(() => PrimaryCompleteView)
             }}>
