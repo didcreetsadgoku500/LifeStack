@@ -1,4 +1,5 @@
 import CardButton from "../atoms/CardButton"
+import LocationView from "./LocationView";
 import SalaryView from "./SalaryView";
 import NextView from "./SampleView"
 
