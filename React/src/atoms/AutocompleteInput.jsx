@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FadeTransition from '../components/FadeTransition';
 
-const AutocompleteInput = ({ suggestions, onSelect }) => {
+const AutocompleteInput = ({ suggestions, onSelect, onInputChange}) => {
   const [inputValue, setInputValue] = useState('');
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -19,12 +19,14 @@ const AutocompleteInput = ({ suggestions, onSelect }) => {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+    onInputChange(e.target.value);
   };
 
   const handleSelectSuggestion = (suggestion) => {
     setInputValue(suggestion);
     setShowSuggestions(false);
     onSelect(suggestion);
+    onInputChange(suggestion);
   };
 
   const handleKeyDown = (e) => {

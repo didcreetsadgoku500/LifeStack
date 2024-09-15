@@ -23,20 +23,20 @@ interface IGlobalState {
 }
 
 interface IGlobalContext {
-    state: IGlobalState | null,
+    state: IGlobalState | {},
     setState: (newState: IGlobalState) => void
 }
 
 
 export const GlobalContext = createContext<IGlobalContext>(
     {
-        state: null, 
+        state: {}, 
         setState: () => {},
 });
 
 
 export const GlobalStateProvider = ({children}: any) => {
-    const [globalState, setGlobalState] = useState<IGlobalState | null>(null);
+    const [globalState, setGlobalState] = useState<IGlobalState | {}>({});
 
 
     return (

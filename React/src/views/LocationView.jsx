@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AutocompleteInput from "../atoms/AutocompleteInput"
 import CardButton from "../atoms/CardButton"
 import Input from "../atoms/Input"
 import { API_BASE_URL } from "../config"
+import {GlobalContext} from '../components/GlobalState'
+import SalaryView from "./SalaryView"
 
 
 const LocationView = (props) => {
     const [suggestions, setSuggestions] = useState([])
+    const appContext = useContext(GlobalContext)
+    
 
     useEffect(() => {
         // Fetch here
@@ -15,14 +19,10 @@ const LocationView = (props) => {
             const casJSON = await countiesAndStates.json()
             const combined = casJSON.map((row) => `${row[0]}, ${row[1]}`)
             setSuggestions(combined)
-
-
         }
 
         getLocations();
     }, [])
-    
-    
     
     
     return <div className="lg:w-1/3 mx-auto pt-12">
@@ -36,10 +36,20 @@ const LocationView = (props) => {
         </p>
 
             <div className="flex flex-wrap flex-col gap-5 w-100">
-            <AutocompleteInput suggestions={suggestions}>
+            <AutocompleteInput suggestions={suggestions} onSelect={
+                (newLocation) => {
+                    const newState = appContext.state;
+                    newState.primaryLocation = newLocation;
+                    appContext.setState(newState)
+                }
+                }>
 
             </AutocompleteInput>
-            <CardButton>Confirm location</CardButton>
+            <CardButton onClick={() => {
+                if (appContext && appContext.state.primaryLocation != "" && appContext.state.primaryLocation != null) {
+                    props.setView(SalaryView)
+                }
+            }}>Confirm location</CardButton>
 
             </div>
 
