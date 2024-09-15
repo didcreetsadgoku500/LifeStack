@@ -38,7 +38,13 @@ const SalaryView = (props) => {
             >I don't know my salary</CardButton> 
         : 
             <CardButton iconSrc="./payroll.png"
-                onClick={() => props.setView(() => FamilyView)}
+                onClick={() => {
+                    props.setView(() => FamilyView)
+                    const newState = appContext.state;
+                    newState.primarySalary = salaryState;
+                    newState.primaryJobTitle = "Custom Job"
+                    appContext.setState(newState)    
+                }}
             >Confirm salary</CardButton>    
         }
     </FadeTransition>

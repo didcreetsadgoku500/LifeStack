@@ -41,7 +41,6 @@ const LocationView = (props) => {
                     const newState = appContext.state;
                     newState.primaryCounty = newLocation.county;
                     newState.primaryState = newLocation.state;
-                    console.log(newState)
                     appContext.setState(newState)
                 }
                 }>

@@ -3,7 +3,8 @@ import AutocompleteInput from "../atoms/AutocompleteInput"
 import CardButton from "../atoms/CardButton"
 import { API_BASE_URL } from "../config"
 import {GlobalContext} from '../components/GlobalState'
-import SalaryView from "./SalaryView"
+import { getStateFullName } from "../utils/utility"
+import FamilyView from "./FamilyView"
 
 const FindMySalaryView = (props) => {
     const [suggestions, setSuggestions] = useState([])
@@ -34,18 +35,27 @@ const FindMySalaryView = (props) => {
 
         <div className="flex flex-wrap flex-col gap-5 w-100">
         <AutocompleteInput suggestions={suggestions} onSelect={
-            (newLocation) => {
+             (newJob) => {
                 const newState = appContext.state;
-                newState.primaryLocation = newLocation;
+                newState.primaryJobTitle = newJob.text;
                 appContext.setState(newState)
+
+                
+
             }
             }>
 
         </AutocompleteInput>
-        <CardButton onClick={() => {
-            if (appContext && appContext.state.primaryLocation != "" && appContext.state.primaryLocation != null) {
-                props.setView(() => SalaryView)
-            }
+        <CardButton onClick={async () => {
+            if (appContext && appContext.state.primaryJobTitle != "" && appContext.state.primaryJobTitle != null) {
+                props.setView(() => FamilyView)
+            
+                const res = await fetch(API_BASE_URL + `api/getSalaryByJobAndLocation?us_state=${getStateFullName(appContext.state.primaryState)}&occupation=${appContext.state.primaryJobTitle}`)
+                const salary = await res.json()
+                const newState = appContext.state;
+                newState.primarySalary = salary.income;
+                appContext.setState(newState)
+        }
         }}>Confirm job</CardButton>
 
         </div>
