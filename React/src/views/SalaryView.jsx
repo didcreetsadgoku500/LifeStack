@@ -27,7 +27,7 @@ const SalaryView = () => {
 
     <div className="flex flex-wrap flex-col gap-5">
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
-    <FadeTransition>
+    <FadeTransition fade_duration={200}>
         {(salaryState == "") ? 
             <CardButton primary>I don't know my salary</CardButton> 
         : 

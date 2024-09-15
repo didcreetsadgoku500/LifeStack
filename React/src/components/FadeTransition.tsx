@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 
-const FadeTransition = ({ children }: any) => {
+const FadeTransition = ({ children, fade_duration }: any) => {
   const [isVisible, setIsVisible] = useState(true);
   const [currentChildren, setCurrentChildren] = useState(children);
+
+  if (fade_duration == null) {
+    fade_duration = 500;
+  }
 
   useEffect(() => {
     if (children !== currentChildren) {
@@ -10,7 +14,7 @@ const FadeTransition = ({ children }: any) => {
       const timer = setTimeout(() => {
         setCurrentChildren(children);
         setIsVisible(true);
-      }, 500); // Wait for fade out to complete
+      }, fade_duration); // Wait for fade out to complete
 
       return () => clearTimeout(timer);
     }
@@ -18,7 +22,7 @@ const FadeTransition = ({ children }: any) => {
 
   return (
     <div 
-      className={`transition-opacity duration-500 ${
+      className={`transition-opacity duration-${fade_duration} ${
         isVisible ? 'opacity-100' : 'opacity-0'
       }`}
     >
