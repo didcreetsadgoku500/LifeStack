@@ -2,14 +2,17 @@ import {useContext, useEffect, useState} from "react";
 import {GlobalContext} from "../components/GlobalState";
 import {currencyFormatter} from "../utils/utility.js";
 import { API_BASE_URL } from "../config.js";
+import { adjustUserSalary } from "../utils/calculations.js";
 
 const ReceiptView = (props) => {
     const appContext = useContext(GlobalContext)
     const [primaryExpenses, setPrimaryExpenses] = useState([])
     const [secondaryExpenses, setSecondaryExpenses] = useState([])
+    const [targetIncome, setTargetIncome] = useState(0)
 
     const primaryTotal = primaryExpenses.reduce((n, {cost}) => n + parseFloat(cost), 0)
     const secondaryTotal = secondaryExpenses.reduce((n, {cost}) => n + parseFloat(cost), 0)
+
 
 
 
@@ -29,6 +32,12 @@ const ReceiptView = (props) => {
 
             let costOfLivingSecondary = await fetch(API_BASE_URL + `api/getCostByCountyAndFamily?family_size=${appContext.state.secondaryFamilySize}&county=${appContext.state.secondaryCounty}&us_state=${appContext.state.secondaryState}`)
             costOfLivingSecondary = await costOfLivingSecondary.json()
+
+            const primaryMedian = parseFloat(costOfLivingPrimary["median_income"]);
+            const secondaryMedian = parseFloat(costOfLivingSecondary["median_income"]);
+            const newTarget = adjustUserSalary(primaryMedian, secondaryMedian, appContext.state.primarySalary)
+
+            setTargetIncome(newTarget);
 
             const importantKeys = ["housing", "food", "transportation", "taxes", "other", "healthcare", "childcare"]
             for (const k of importantKeys) {
@@ -82,7 +91,7 @@ const ReceiptView = (props) => {
                     <h3 className="text-2xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
                         {`${appContext.state.primaryCounty}, ${appContext.state.primaryState}`}
                     </h3>
-                    <h4 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                    <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                     {appContext.state.primaryJobTitle}
                     </h4>
 
@@ -116,7 +125,7 @@ const ReceiptView = (props) => {
                     {`${appContext.state.secondaryCounty}, ${appContext.state.secondaryState}`}
                     
                     </h3>
-                    <h4 className="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-300">
+                    <h4 className="text-xl font-semibold text-gray-700 dark:text-gray-300">
                     {appContext.state.secondaryJobTitle}
                     </h4>
                     <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">
@@ -144,8 +153,20 @@ const ReceiptView = (props) => {
                 
                 </div>
             </div>
+                    
 
-        </div>)
+            <div className="pt-5 justify-center align-middle content-center ">
+            <h3 className="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+                    {currencyFormatter(targetIncome)}
+            </h3>
+            <p className="text-gray-800 font-bold justify-between w-full">
+                    Salary needed in {appContext.state.secondaryCounty}, {appContext.state.secondaryState} to maintain standard of living
+            </p>
+
+
+            </div>
+        </div>
+        )
 }
 
 export default ReceiptView;
