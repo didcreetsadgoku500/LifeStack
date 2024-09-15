@@ -1,4 +1,5 @@
 import CardButton from "../atoms/CardButton"
+import LocationView from "./LocationView";
 import SalaryView from "./SalaryView";
 import NextView from "./SampleView"
 
@@ -15,7 +16,7 @@ const InitialView = (props) => {
         
         <div className="flex flex-wrap mt-10">
 
-        <CardButton onClick={() => props.setView(() => SalaryView)}>
+        <CardButton onClick={() => props.setView(() => LocationView)}>
                 Let's get started!
         </CardButton>
         </div>
