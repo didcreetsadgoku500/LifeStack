@@ -20,7 +20,7 @@ const SalaryView = () => {
 
     <div className="flex flex-wrap flex-col gap-5">
     <Input placeholder="Enter your salary" inputType="numeric" onInputChange={(e) => handleSalaryChange(e, salaryState, setSalary)}/>
-    <CardButton>
+    <CardButton primary>
         I don't know my salary
     </CardButton>
     </div>
