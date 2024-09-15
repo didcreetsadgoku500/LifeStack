@@ -4,9 +4,17 @@ import { createContext, useState } from "react";
 interface IGlobalState {
     primaryLocation: string,
     secondaryLocation?: string,
-    jobTitle?: string,
-    salary?: number,
-    costs?: {
+    primaryJobTitle?: string,
+    secondaryJobTitle?: string,
+    primarySalary?: number,
+    secondarySalary?: number,
+    primaryCosts?: {
+        [family: string]: {
+            cost: number,
+            option?: string
+        }
+    }
+    secondaryCosts?: {
         [family: string]: {
             cost: number,
             option?: string
@@ -17,7 +25,7 @@ interface IGlobalState {
 interface IGlobalContext {
     state: IGlobalState | null,
     setState: (newState: IGlobalState) => void
-};
+}
 
 
 export const GlobalContext = createContext<IGlobalContext>(
